@@ -7,14 +7,17 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		03203703C05FB0FE067B1643 /* Pods_KFPageTabStripController_Tests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4A1D833127942F43D8B613A2 /* Pods_KFPageTabStripController_Tests.framework */; };
+		0A6E98EA26E7398D008C33DE /* KFMessageBoxViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A6E98E926E7398D008C33DE /* KFMessageBoxViewController.swift */; };
+		0AECEDF426F2E80500ADE8CB /* DemoFirstViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AECEDF326F2E80500ADE8CB /* DemoFirstViewController.swift */; };
+		0AECEDF626F2E81100ADE8CB /* DemoSecondViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AECEDF526F2E81100ADE8CB /* DemoSecondViewController.swift */; };
 		607FACD61AFB9204008FA782 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 607FACD51AFB9204008FA782 /* AppDelegate.swift */; };
 		607FACD81AFB9204008FA782 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 607FACD71AFB9204008FA782 /* ViewController.swift */; };
 		607FACDB1AFB9204008FA782 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 607FACD91AFB9204008FA782 /* Main.storyboard */; };
 		607FACDD1AFB9204008FA782 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 607FACDC1AFB9204008FA782 /* Images.xcassets */; };
 		607FACE01AFB9204008FA782 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 607FACDE1AFB9204008FA782 /* LaunchScreen.xib */; };
 		607FACEC1AFB9204008FA782 /* Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 607FACEB1AFB9204008FA782 /* Tests.swift */; };
-		86714F4D6E9B282D31920591 /* Pods_KFPageTabStripController_Example.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 477E706EF75FE0B73128B642 /* Pods_KFPageTabStripController_Example.framework */; };
+		A31A5600B099FCB865C6A7BA /* libPods-KFPageTabStripController_Tests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = EFCDFDEC22FB2D1347B0B31F /* libPods-KFPageTabStripController_Tests.a */; };
+		A53BF5F3127705BCDFEF47F3 /* libPods-KFPageTabStripController_Example.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 8B460B0E4B1104C68CF8E282 /* libPods-KFPageTabStripController_Example.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -28,11 +31,12 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		0A6E98E926E7398D008C33DE /* KFMessageBoxViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KFMessageBoxViewController.swift; sourceTree = "<group>"; };
+		0AECEDF326F2E80500ADE8CB /* DemoFirstViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DemoFirstViewController.swift; sourceTree = "<group>"; };
+		0AECEDF526F2E81100ADE8CB /* DemoSecondViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DemoSecondViewController.swift; sourceTree = "<group>"; };
 		2FB84668D3F164F9A0529F24 /* Pods-KFPageTabStripController_Tests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-KFPageTabStripController_Tests.debug.xcconfig"; path = "Target Support Files/Pods-KFPageTabStripController_Tests/Pods-KFPageTabStripController_Tests.debug.xcconfig"; sourceTree = "<group>"; };
-		477E706EF75FE0B73128B642 /* Pods_KFPageTabStripController_Example.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_KFPageTabStripController_Example.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		49E170C9AB147FBA0BF75C39 /* LICENSE */ = {isa = PBXFileReference; includeInIndex = 1; name = LICENSE; path = ../LICENSE; sourceTree = "<group>"; };
-		4A1D833127942F43D8B613A2 /* Pods_KFPageTabStripController_Tests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_KFPageTabStripController_Tests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		4FF12E85617E665DD9926072 /* KFPageTabStripController.podspec */ = {isa = PBXFileReference; includeInIndex = 1; name = KFPageTabStripController.podspec; path = ../KFPageTabStripController.podspec; sourceTree = "<group>"; };
+		49E170C9AB147FBA0BF75C39 /* LICENSE */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = LICENSE; path = ../LICENSE; sourceTree = "<group>"; };
+		4FF12E85617E665DD9926072 /* KFPageTabStripController.podspec */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = KFPageTabStripController.podspec; path = ../KFPageTabStripController.podspec; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
 		607FACD01AFB9204008FA782 /* KFPageTabStripController_Example.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = KFPageTabStripController_Example.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		607FACD41AFB9204008FA782 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		607FACD51AFB9204008FA782 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -43,8 +47,10 @@
 		607FACE51AFB9204008FA782 /* KFPageTabStripController_Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = KFPageTabStripController_Tests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		607FACEA1AFB9204008FA782 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		607FACEB1AFB9204008FA782 /* Tests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tests.swift; sourceTree = "<group>"; };
-		78DCFBF5FCD00D122CD125A0 /* README.md */ = {isa = PBXFileReference; includeInIndex = 1; name = README.md; path = ../README.md; sourceTree = "<group>"; };
+		78DCFBF5FCD00D122CD125A0 /* README.md */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = net.daringfireball.markdown; name = README.md; path = ../README.md; sourceTree = "<group>"; };
+		8B460B0E4B1104C68CF8E282 /* libPods-KFPageTabStripController_Example.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-KFPageTabStripController_Example.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		A35293875393F306978C4260 /* Pods-KFPageTabStripController_Example.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-KFPageTabStripController_Example.debug.xcconfig"; path = "Target Support Files/Pods-KFPageTabStripController_Example/Pods-KFPageTabStripController_Example.debug.xcconfig"; sourceTree = "<group>"; };
+		EFCDFDEC22FB2D1347B0B31F /* libPods-KFPageTabStripController_Tests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-KFPageTabStripController_Tests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		F61415C154652269EE23EA32 /* Pods-KFPageTabStripController_Tests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-KFPageTabStripController_Tests.release.xcconfig"; path = "Target Support Files/Pods-KFPageTabStripController_Tests/Pods-KFPageTabStripController_Tests.release.xcconfig"; sourceTree = "<group>"; };
 		FB0355E041DF0B8BEAF7899A /* Pods-KFPageTabStripController_Example.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-KFPageTabStripController_Example.release.xcconfig"; path = "Target Support Files/Pods-KFPageTabStripController_Example/Pods-KFPageTabStripController_Example.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -54,7 +60,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				86714F4D6E9B282D31920591 /* Pods_KFPageTabStripController_Example.framework in Frameworks */,
+				A53BF5F3127705BCDFEF47F3 /* libPods-KFPageTabStripController_Example.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -62,7 +68,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				03203703C05FB0FE067B1643 /* Pods_KFPageTabStripController_Tests.framework in Frameworks */,
+				A31A5600B099FCB865C6A7BA /* libPods-KFPageTabStripController_Tests.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -95,6 +101,9 @@
 			children = (
 				607FACD51AFB9204008FA782 /* AppDelegate.swift */,
 				607FACD71AFB9204008FA782 /* ViewController.swift */,
+				0A6E98E926E7398D008C33DE /* KFMessageBoxViewController.swift */,
+				0AECEDF326F2E80500ADE8CB /* DemoFirstViewController.swift */,
+				0AECEDF526F2E81100ADE8CB /* DemoSecondViewController.swift */,
 				607FACD91AFB9204008FA782 /* Main.storyboard */,
 				607FACDC1AFB9204008FA782 /* Images.xcassets */,
 				607FACDE1AFB9204008FA782 /* LaunchScreen.xib */,
@@ -147,15 +156,14 @@
 				2FB84668D3F164F9A0529F24 /* Pods-KFPageTabStripController_Tests.debug.xcconfig */,
 				F61415C154652269EE23EA32 /* Pods-KFPageTabStripController_Tests.release.xcconfig */,
 			);
-			name = Pods;
 			path = Pods;
 			sourceTree = "<group>";
 		};
 		9DFFAA9460C42D368D96A8D9 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				477E706EF75FE0B73128B642 /* Pods_KFPageTabStripController_Example.framework */,
-				4A1D833127942F43D8B613A2 /* Pods_KFPageTabStripController_Tests.framework */,
+				8B460B0E4B1104C68CF8E282 /* libPods-KFPageTabStripController_Example.a */,
+				EFCDFDEC22FB2D1347B0B31F /* libPods-KFPageTabStripController_Tests.a */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -171,7 +179,6 @@
 				607FACCC1AFB9204008FA782 /* Sources */,
 				607FACCD1AFB9204008FA782 /* Frameworks */,
 				607FACCE1AFB9204008FA782 /* Resources */,
-				E5109FB0F02A1EECF8450186 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -227,6 +234,7 @@
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
 			knownRegions = (
+				English,
 				en,
 				Base,
 			);
@@ -284,24 +292,6 @@
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
-		E5109FB0F02A1EECF8450186 /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-KFPageTabStripController_Example/Pods-KFPageTabStripController_Example-frameworks.sh",
-				"${BUILT_PRODUCTS_DIR}/KFPageTabStripController/KFPageTabStripController.framework",
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputPaths = (
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/KFPageTabStripController.framework",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-KFPageTabStripController_Example/Pods-KFPageTabStripController_Example-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
 		FEC8EFC4975A3CC75908F6F3 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -331,8 +321,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0AECEDF426F2E80500ADE8CB /* DemoFirstViewController.swift in Sources */,
 				607FACD81AFB9204008FA782 /* ViewController.swift in Sources */,
+				0AECEDF626F2E81100ADE8CB /* DemoSecondViewController.swift in Sources */,
 				607FACD61AFB9204008FA782 /* AppDelegate.swift in Sources */,
+				0A6E98EA26E7398D008C33DE /* KFMessageBoxViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

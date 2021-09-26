@@ -1,0 +1,6 @@
+module Pods_KFPageTabStripController_Example {
+  umbrella header "Pods-KFPageTabStripController_Example-umbrella.h"
+
+  export *
+  module * { export * }
+}

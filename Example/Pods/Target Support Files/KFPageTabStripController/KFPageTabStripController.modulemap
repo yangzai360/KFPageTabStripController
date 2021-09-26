@@ -1,0 +1,6 @@
+module KFPageTabStripController {
+  umbrella header "KFPageTabStripController-umbrella.h"
+
+  export *
+  module * { export * }
+}

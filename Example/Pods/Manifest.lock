@@ -1,0 +1,23 @@
+PODS:
+  - KFPageTabStripController (0.1.0):
+    - SnapKit
+  - SnapKit (4.2.0)
+
+DEPENDENCIES:
+  - KFPageTabStripController (from `../`)
+
+SPEC REPOS:
+  trunk:
+    - SnapKit
+
+EXTERNAL SOURCES:
+  KFPageTabStripController:
+    :path: "../"
+
+SPEC CHECKSUMS:
+  KFPageTabStripController: ccec15c406344788c7d81a2aa669990cf7e4a08f
+  SnapKit: fe8a619752f3f27075cc9a90244d75c6c3f27e2a
+
+PODFILE CHECKSUM: e29a5c95964f432cc152f72a86982b45cd64f01b
+
+COCOAPODS: 1.10.1

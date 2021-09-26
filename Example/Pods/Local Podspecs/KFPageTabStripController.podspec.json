@@ -1,0 +1,30 @@
+{
+  "name": "KFPageTabStripController",
+  "version": "0.1.0",
+  "summary": "A short description of KFPageTabStripController.",
+  "description": "TODO: Add long description of the pod here.",
+  "homepage": "https://github.com/7035329/KFPageTabStripController",
+  "license": {
+    "type": "MIT",
+    "file": "LICENSE"
+  },
+  "authors": {
+    "7035329": "jieyang@didichuxing.com"
+  },
+  "source": {
+    "git": "https://github.com/7035329/KFPageTabStripController.git",
+    "tag": "0.1.0"
+  },
+  "swift_versions": "5.3",
+  "platforms": {
+    "ios": "9.0"
+  },
+  "source_files": "KFPageTabStripController/Classes/**/*",
+  "frameworks": "UIKit",
+  "dependencies": {
+    "SnapKit": [
+
+    ]
+  },
+  "swift_version": "5.3"
+}
