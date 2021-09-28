@@ -9,7 +9,7 @@
 import UIKit
 import KFPageTabStripController
 
-open class DemoFirstViewController : UIViewController, IndicatorInfoProvider{
+open class DemoFirstViewController : UIViewController, IndicatorInfoProvider {
     open override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .blue
@@ -17,7 +17,7 @@ open class DemoFirstViewController : UIViewController, IndicatorInfoProvider{
     }
     
     public func indicatorInfo(for pageTabController: PageTabViewController) -> IndicatorInfo {
-        let info = IndicatorInfo(title: "First!")
+        let info = IndicatorInfo(title: "服务通知")
         return info
     }
 }

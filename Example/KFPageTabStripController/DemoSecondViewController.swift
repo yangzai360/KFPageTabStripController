@@ -17,7 +17,7 @@ open class DemoSecondViewController : UIViewController, IndicatorInfoProvider {
     }
     
     public func indicatorInfo(for pageTabController: PageTabViewController) -> IndicatorInfo {
-        let info = IndicatorInfo(title: "Hello")
+        let info = IndicatorInfo(title: "其他")
         return info
     }
 }

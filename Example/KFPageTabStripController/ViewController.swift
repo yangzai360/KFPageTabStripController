@@ -22,6 +22,14 @@ class ViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        if #available(iOS 13.0, *) {
+            let barApp = UINavigationBarAppearance()
+            barApp.backgroundColor = .white
+            navigationController!.navigationBar.scrollEdgeAppearance = barApp
+            navigationController!.navigationBar.standardAppearance = barApp
+        }
+        
         navigationController?.navigationBar.isTranslucent = false
         view.addSubview(button)
         button.snp_makeConstraints { make in

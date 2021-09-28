@@ -13,7 +13,7 @@ public protocol IndicatorInfoProvider {
 }
 
 public protocol PageTabStripDelegate: AnyObject {
-    func updateIndicator(for viewController: PageTabViewController, fromIndex: Int, toIndex: Int)
+    func updateIndicator(for viewController: PageTabViewController, fromIndex: Int, toIndex: Int, rate: CGFloat)
 }
 
 public protocol PageTabStripDataSource: AnyObject {
@@ -38,7 +38,6 @@ open class PageTabViewController : UIViewController, UIScrollViewDelegate {
     }
     open func offsetForChild(at index: Int) -> CGFloat {
         return CGFloat(index) * containerView.bounds.width
-//        + ((containerView.bounds.width - view.bounds.width) * 0.5
     }
     
     open override func viewDidLoad() {
@@ -57,6 +56,7 @@ open class PageTabViewController : UIViewController, UIScrollViewDelegate {
         containerView.showsHorizontalScrollIndicator = false
         containerView.isPagingEnabled = true
         containerView.backgroundColor = .yellow
+        containerView.delegate = self
         reloadDataSource()
         installChildViewController()
         view.clipsToBounds = true
@@ -104,5 +104,21 @@ open class PageTabViewController : UIViewController, UIScrollViewDelegate {
     open func viewControllers(for pageTabController: PageTabViewController) -> [UIViewController] {
         assertionFailure("Sub-class must implement the PagerTabStripDataSource viewControllers(for:) method")
         return []
+    }
+    
+    // MARK: - UISCrollViewDelegate
+    public func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        let offsetX = scrollView.contentOffset.x
+        let width = view.bounds.width
+        let rate = offsetX / width
+        let newIndex = (Int)(offsetX / width + 0.5)
+        if newIndex > viewControllers.count - 1 || newIndex < 0 {
+            return
+        }
+        delegate?.updateIndicator(for: self, fromIndex: currentIndex, toIndex: newIndex, rate: rate)
+        if currentIndex != newIndex {
+            currentIndex = newIndex
+        }
+
     }
 }
