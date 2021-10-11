@@ -22,7 +22,23 @@ public protocol PageTabStripDataSource: AnyObject {
 
 open class PageTabViewController : UIViewController, UIScrollViewDelegate {
     
-    public var containerView: UIScrollView!
+    open var scrollView: UIScrollView = {
+        var scrollViewAux = UIScrollView(frame: CGRect())
+        scrollViewAux.bounces = true
+        scrollViewAux.alwaysBounceHorizontal = true
+        scrollViewAux.alwaysBounceVertical = false
+        scrollViewAux.scrollsToTop = false
+        scrollViewAux.showsVerticalScrollIndicator = false
+        scrollViewAux.showsHorizontalScrollIndicator = false
+        scrollViewAux.isPagingEnabled = true
+        scrollViewAux.backgroundColor = .clear
+        return scrollViewAux
+    }()
+    
+    open var containerView: UIView = {
+        let containerViewAux = UIView(frame: CGRect())
+        return containerViewAux
+    }()
 
     open weak var delegate: PageTabStripDelegate?
     open weak var datasource: PageTabStripDataSource?
@@ -31,42 +47,33 @@ open class PageTabViewController : UIViewController, UIScrollViewDelegate {
     open private(set) var currentIndex = 0
 
     open var pageWidth: CGFloat {
-        return containerView.bounds.width
+        return scrollView.bounds.width
     }
     open func pageOffsetForChild(at index: Int) -> CGFloat {
-        return CGFloat(index) * containerView.bounds.width
+        return CGFloat(index) * scrollView.bounds.width
     }
     open func offsetForChild(at index: Int) -> CGFloat {
-        return CGFloat(index) * containerView.bounds.width
+        return CGFloat(index) * scrollView.bounds.width
     }
     
     open override func viewDidLoad() {
         super.viewDidLoad()
-        containerView = UIScrollView()
-        view.addSubview(containerView)
-        containerView.snp_makeConstraints { make in
-            make.edges.equalTo(view)
+        view.addSubview(scrollView)
+        scrollView.delegate = self
+        scrollView.snp_makeConstraints { make in
+            make.left.bottom.right.equalToSuperview()
+            make.top.equalToSuperview().offset(50)
         }
-        containerView.bounces = true
-        containerView.alwaysBounceHorizontal = true
-        containerView.alwaysBounceVertical = false
-        containerView.scrollsToTop = false
-        containerView.delegate = self
-        containerView.showsVerticalScrollIndicator = false
-        containerView.showsHorizontalScrollIndicator = false
-        containerView.isPagingEnabled = true
-        containerView.backgroundColor = .yellow
-        containerView.delegate = self
+        scrollView.addSubview(containerView)
+        containerView.snp_makeConstraints { make in
+            make.edges.equalToSuperview()
+            make.height.equalToSuperview()
+        }
+        
         reloadDataSource()
         installChildViewController()
-        view.clipsToBounds = true
-        print(containerView.frame.size)
     }
     
-    open override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
-        containerView.contentSize = CGSize(width: containerView.bounds.width * CGFloat(viewControllers.count), height: view.bounds.height)
-    }
     
     private func reloadDataSource() {
         guard let dataSource = datasource else {
@@ -88,16 +95,22 @@ open class PageTabViewController : UIViewController, UIScrollViewDelegate {
     
     func installChildViewController() {
         for (index, childController) in viewControllers.enumerated() {
-//            let pageOffsetForChild = self.pageOffsetForChild(at: index)
             addChild(childController)
-            childController.view.frame = CGRect(x: CGFloat(index) * view.bounds.width,
-                                                y: 0,
-                                                width: view.bounds.width,
-                                                height: view.bounds.height)
-//            childController.view.autoresizingMask = [.flexibleHeight, .flexibleWidth]
             containerView.addSubview(childController.view)
+            childController.view.snp_makeConstraints { make in
+                make.top.bottom.equalToSuperview()
+                make.left.equalToSuperview().offset(CGFloat(index) * view.bounds.width)
+                make.width.equalTo(view.bounds.width)
+                if index == self.viewControllers.count - 1 {
+                    make.right.equalToSuperview()
+                }
+            }
         }
-        containerView.contentSize = CGSize(width: view.bounds.width * CGFloat(viewControllers.count), height: view.bounds.height)
+    }
+    
+    // MARK: - Public
+    open func updateIndicatorInfo(_ viewController: UIViewController) {
+        assertionFailure("Sub-class must implement the PagerTabStripDataSource viewControllers(for:) method")
     }
     
     // MARK: - PagerTabStripDataSource
@@ -108,6 +121,9 @@ open class PageTabViewController : UIViewController, UIScrollViewDelegate {
     
     // MARK: - UISCrollViewDelegate
     public func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        if scrollView.contentOffset.y != 0 {
+            scrollView.contentOffset = CGPoint(x: scrollView.contentOffset.x, y: 0.0)
+        }
         let offsetX = scrollView.contentOffset.x
         let width = view.bounds.width
         let rate = offsetX / width

@@ -11,6 +11,7 @@
 		0A5ADB2326F195620078F443 /* PageTabViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A5ADB2226F195620078F443 /* PageTabViewController.swift */; };
 		0A5DB2C226F496CF00073C8C /* PageBarButtonCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A5DB2C126F496CF00073C8C /* PageBarButtonCell.swift */; };
 		0AA99EBE26F1A2FB005B5DAE /* IndicatorInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AA99EBD26F1A2FB005B5DAE /* IndicatorInfo.swift */; };
+		0AC3EC8C27102114004799D8 /* UnreadRedDot.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AC3EC8B27102114004799D8 /* UnreadRedDot.swift */; };
 		21084E88A56A9DD0702E82A7E5172F55 /* UILayoutSupport+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C87F70E835D22459F492D40CB584A67 /* UILayoutSupport+Extensions.swift */; };
 		219118E58CFD6B05845C6187DCE717AA /* SnapKit-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = F499669AB015887B4FA20C26E51B11F4 /* SnapKit-dummy.m */; };
 		23AE246D20EF2134864E144EC6F600B1 /* ConstraintPriority.swift in Sources */ = {isa = PBXBuildFile; fileRef = 161FED143DE8DD1AC41D71D22AEA464B /* ConstraintPriority.swift */; };
@@ -94,6 +95,7 @@
 		0A5ADB2226F195620078F443 /* PageTabViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PageTabViewController.swift; sourceTree = "<group>"; };
 		0A5DB2C126F496CF00073C8C /* PageBarButtonCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PageBarButtonCell.swift; sourceTree = "<group>"; };
 		0AA99EBD26F1A2FB005B5DAE /* IndicatorInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IndicatorInfo.swift; sourceTree = "<group>"; };
+		0AC3EC8B27102114004799D8 /* UnreadRedDot.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = UnreadRedDot.swift; path = KFPageTabStripController/Classes/UnreadRedDot.swift; sourceTree = "<group>"; };
 		144DAF3614C757BDAABBA78E4B4866FC /* ConstraintLayoutGuide+Extensions.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = "ConstraintLayoutGuide+Extensions.swift"; path = "Source/ConstraintLayoutGuide+Extensions.swift"; sourceTree = "<group>"; };
 		161FED143DE8DD1AC41D71D22AEA464B /* ConstraintPriority.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ConstraintPriority.swift; path = Source/ConstraintPriority.swift; sourceTree = "<group>"; };
 		1D785499A983457B14804D1A32292DE4 /* KFPageTabStripController-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "KFPageTabStripController-umbrella.h"; sourceTree = "<group>"; };
@@ -298,6 +300,7 @@
 				67B984259093D645DE64B25BE363B1F7 /* SampleButtonTabStripViewController.swift */,
 				0A5DB2C126F496CF00073C8C /* PageBarButtonCell.swift */,
 				0A5ADB2226F195620078F443 /* PageTabViewController.swift */,
+				0AC3EC8B27102114004799D8 /* UnreadRedDot.swift */,
 				0AA99EBD26F1A2FB005B5DAE /* IndicatorInfo.swift */,
 				7BCA173E9CF5CDC712FDE463F94E0BF4 /* Pod */,
 				0C9C6A9FEACC8406194ADF7190D81CA3 /* Support Files */,
@@ -582,6 +585,7 @@
 			files = (
 				0A5DB2C226F496CF00073C8C /* PageBarButtonCell.swift in Sources */,
 				0A5ADB2326F195620078F443 /* PageTabViewController.swift in Sources */,
+				0AC3EC8C27102114004799D8 /* UnreadRedDot.swift in Sources */,
 				53F0E8B1B3C399AF75ACBF4FDF17C1CB /* KFPageTabStripController-dummy.m in Sources */,
 				9065734AD5BE4F8B6C2D92851BAF6EB7 /* SampleButtonTabStripViewController.swift in Sources */,
 				0AA99EBE26F1A2FB005B5DAE /* IndicatorInfo.swift in Sources */,

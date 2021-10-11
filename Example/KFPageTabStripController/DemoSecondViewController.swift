@@ -10,14 +10,25 @@ import UIKit
 import KFPageTabStripController
 
 open class DemoSecondViewController : UIViewController, IndicatorInfoProvider {
+    weak var pageTabViewControllerOp: PageTabViewController?
+    var indicatorInfo = IndicatorInfo(title: "其他")
+    
     open override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .green
         view.clipsToBounds = true
+        
+        indicatorInfo.unreadCount = 88
+        
+        DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
+            self.indicatorInfo.unreadCount = 32
+            self.pageTabViewControllerOp!.updateIndicatorInfo(self)
+        }
     }
     
     public func indicatorInfo(for pageTabController: PageTabViewController) -> IndicatorInfo {
-        let info = IndicatorInfo(title: "其他")
-        return info
+        pageTabViewControllerOp = pageTabController
+        return indicatorInfo
     }
+    
 }

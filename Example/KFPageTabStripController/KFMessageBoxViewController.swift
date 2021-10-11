@@ -16,6 +16,6 @@ open class KFMessageBoxViewController : SampleButtonTabStripViewController {
         
         let firstVC = DemoFirstViewController()
         let secondVC = DemoSecondViewController()
-        return [firstVC, secondVC];
+        return [firstVC, secondVC, DemoFirstViewController(), DemoSecondViewController()];
     }
 }

@@ -24,16 +24,15 @@ open class SampleButtonTabStripViewController : PageTabViewController, PageTabSt
     public var pageTabCollectionView: UICollectionView = {
         let flowLayout = UICollectionViewFlowLayout()
         flowLayout.minimumInteritemSpacing = 20
-        flowLayout.estimatedItemSize = CGSize(width: 100, height: 25) // cell内部自己维护 KF的高度需要固定25
+        flowLayout.estimatedItemSize = CGSize(width: 100, height: 45) // cell内部自己维护 KF的高度需要固定45
         flowLayout.sectionInset = UIEdgeInsets(top: 7, left: 20, bottom: 0, right: 0)
         
         flowLayout.scrollDirection = .vertical
         let collectionViewAux = UICollectionView(frame: CGRect(x: 0, y: 0,
                                                                width: UIScreen.main.bounds.size.width, height: 30),
                                                  collectionViewLayout: flowLayout)
-//      debug color
-        //        collectionViewAux.backgroundColor = UIColor.red
-        
+
+        collectionViewAux.isScrollEnabled = false
         return collectionViewAux
     }()
     
@@ -69,6 +68,7 @@ open class SampleButtonTabStripViewController : PageTabViewController, PageTabSt
                 make.height.equalTo(50)
             }
         }
+        
         if pageTabCollectionView.delegate == nil {
             pageTabCollectionView.delegate = self
         }
@@ -83,6 +83,13 @@ open class SampleButtonTabStripViewController : PageTabViewController, PageTabSt
         pageTabCollectionView.register(PageBarButtonCell.self, forCellWithReuseIdentifier:"KFPageBarButtonCell")
     }
 
+    // MARK: - PageTabStrip
+    override open func updateIndicatorInfo(_ viewController: UIViewController) {
+        if viewControllers.contains(viewController) {
+            let index = viewControllers.firstIndex(of: viewController)!
+            pageTabCollectionView.reloadItems(at: [IndexPath(row: index, section: 0)])
+        }
+    }
     
     // MARK: - PageTabStripDelegate
     public func updateIndicator(for viewController: PageTabViewController, fromIndex: Int, toIndex: Int, rate: CGFloat) {
@@ -99,7 +106,7 @@ open class SampleButtonTabStripViewController : PageTabViewController, PageTabSt
         }
         
         guard let preFrame = preCellFrameOp, let nextFrame = nextCellFrameOp else {
-            //如果使劲儿接力滑动，可能真的出现这种情况
+            //如果使劲儿接力滑动，可能出现
             return
         }
         
@@ -141,12 +148,19 @@ open class SampleButtonTabStripViewController : PageTabViewController, PageTabSt
         let childController = viewControllers[indexPath.row] as! IndicatorInfoProvider
         let indicatorInfo = childController.indicatorInfo(for: self)
         cell.label.text = indicatorInfo.title
+        cell.unreadDot.setUnreadCount(indicatorInfo.unreadCount)
         if indexPath.row == currentIndex {
             cell.changeToSelected()
         } else {
             cell.changeToUnselected()
         }
         return cell
+    }
+    
+    // MARK: - UICollectionView Delegate
+    public func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        let width  = UIScreen.main.bounds.width
+        scrollView.setContentOffset(CGPoint(x: width * CGFloat(indexPath.row), y: 0), animated: true)
     }
     
     // MARK: - Pricate

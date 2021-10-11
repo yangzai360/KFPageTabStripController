@@ -13,6 +13,7 @@ public struct IndicatorInfo {
     public var highlightedImage: UIImage?
     public var accessibilityLabel: String?
     public var userInfo: Any?
+    public var unreadCount = 0
     
     public init(title: String?) {
         self.title = title

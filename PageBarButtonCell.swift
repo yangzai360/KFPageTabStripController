@@ -24,14 +24,23 @@ class PageBarButtonCell : UICollectionViewCell {
         return labelAux
     }()
     
+    var unreadDot = UnreadRedDot(frame: CGRect())
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
         addSubview(label)
+        label.setContentHuggingPriority(.defaultHigh, for: .horizontal)
         label.snp_makeConstraints { make in
-            make.left.right.equalToSuperview()
+            make.left.right.equalToSuperview().priorityLow()
+            make.centerX.equalToSuperview().priorityHigh()
             make.height.equalTo(25)
             make.top.equalToSuperview().offset(7)
             make.bottom.equalToSuperview().offset(-13)
+        }
+        addSubview(unreadDot)
+        unreadDot.snp_makeConstraints { make in
+            make.left.equalTo(label.snp_right).offset(-12)
+            make.bottom.equalTo(label.snp_top).offset(10)
         }
     }
     
