@@ -31,9 +31,9 @@ class PageBarButtonCell : UICollectionViewCell {
         addSubview(label)
         label.setContentHuggingPriority(.defaultHigh, for: .horizontal)
         label.snp_makeConstraints { make in
-            make.left.right.equalToSuperview().priorityLow()
+            make.left.right.equalToSuperview()
             make.width.greaterThanOrEqualTo(0)
-            make.centerX.equalToSuperview().priorityHigh()
+            make.centerX.equalToSuperview()
             make.height.equalTo(25)
             make.top.equalToSuperview().offset(7)
             make.bottom.equalToSuperview().offset(-13)
