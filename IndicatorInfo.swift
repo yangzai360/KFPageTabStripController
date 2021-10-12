@@ -9,14 +9,9 @@ import Foundation
 
 public struct IndicatorInfo {
     public var title: String?
-    public var image: UIImage?
-    public var highlightedImage: UIImage?
-    public var accessibilityLabel: String?
-    public var userInfo: Any?
     public var unreadCount = 0
     
     public init(title: String?) {
         self.title = title
-        self.accessibilityLabel = title
     }
 }

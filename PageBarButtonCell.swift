@@ -11,7 +11,7 @@ import UIKit
 
 class PageBarButtonCell : UICollectionViewCell {
     
-    let unselectedFont = UIFont.init(name: "PingFang-SC-Redular", size: 13) ?? UIFont.systemFont(ofSize: 14)
+    let unselectedFont = UIFont.init(name: "PingFang-SC-Redular", size: 13) ?? UIFont.systemFont(ofSize: 13)
     let unselectedColor = UIColor.gray
     let selectedFont = UIFont.init(name: "PingFang-SC-Medium", size: 16) ?? UIFont.boldSystemFont(ofSize: 16)
     let selectedColor = UIColor.black

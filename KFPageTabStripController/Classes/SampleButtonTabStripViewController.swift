@@ -1,20 +1,26 @@
+//
+//  SampleButtonTabStripViewController.swift
+//  KFPageTabStripController
+//
+//  Created by jieyang on 2021/9/15.
+//
 
 import UIKit
 import SnapKit
 
 public struct KFSampleButtonPageTabSettings {
     public struct Style {
-        public var buttonBarBackgroundColor: UIColor?
-        public var selectedBarBackgroundColor = UIColor.black
-        public var selectedBarHeight: CGFloat = 5
+        public var buttonBarBackgroundColor = UIColor.white
+        public var indicatorViewBackgroundColor = UIColor(red: 0x7F/256, green: 0x00/256, blue: 0xFF/256, alpha: 1)
+        public var indicatorHeight: CGFloat = 3
         
         public var buttonBarItemBackgroundColor: UIColor?
-        public var buttonBarItemFont = UIFont.systemFont(ofSize: 18)
+//        public var buttonBarItemFont = UIFont.systemFont(ofSize: 18)
         public var buttonBarItemLeftRightMargin: CGFloat = 8
-        public var buttonBarItemTitleColor: UIColor?
-        
-        public var buttonBarHeight: CGFloat?
+//        public var buttonBarItemTitleColor: UIColor?
+        public var buttonBarHeight: CGFloat = 45
     }
+    public var style = Style()
 }
 
 open class SampleButtonTabStripViewController : PageTabViewController, PageTabStripDataSource, PageTabStripDelegate, UICollectionViewDataSource, UICollectionViewDelegate {
@@ -26,23 +32,17 @@ open class SampleButtonTabStripViewController : PageTabViewController, PageTabSt
         flowLayout.minimumInteritemSpacing = 20
         flowLayout.estimatedItemSize = CGSize(width: 100, height: 45) // cell内部自己维护 KF的高度需要固定45
         flowLayout.sectionInset = UIEdgeInsets(top: 7, left: 20, bottom: 0, right: 0)
-        
         flowLayout.scrollDirection = .vertical
         let collectionViewAux = UICollectionView(frame: CGRect(x: 0, y: 0,
                                                                width: UIScreen.main.bounds.size.width, height: 30),
                                                  collectionViewLayout: flowLayout)
-
         collectionViewAux.isScrollEnabled = false
         return collectionViewAux
     }()
     
     public var selectedTabIndicatorView: UIView = {
-       let barViewAux = UIView(frame: CGRect(x: 20, y: 42, width: 64, height: 3))
-        barViewAux.layer.cornerRadius = 1.5 // 这个值需要在外部改变的时候动态变成 height/2
-        barViewAux.backgroundColor = .purple
-        barViewAux.backgroundColor = UIColor(red: 0x7F/256, green: 0x00/256, blue: 0xFF/256, alpha: 1)
+        let barViewAux = UIView()
         barViewAux.layer.zPosition = 9999
-
         return barViewAux
     }()
     
@@ -61,28 +61,27 @@ open class SampleButtonTabStripViewController : PageTabViewController, PageTabSt
     // MARK: - Life cycle
     open override func viewDidLoad() {
         super.viewDidLoad()
-        if pageTabCollectionView.superview == nil {
-            view.addSubview(pageTabCollectionView)
-            pageTabCollectionView.snp_makeConstraints { make in
-                make.top.left.right.equalTo(view)
-                make.height.equalTo(50)
-            }
+                
+        view.addSubview(pageTabCollectionView)
+        pageTabCollectionView.snp_makeConstraints { make in
+            make.top.left.right.equalTo(view)
+            make.height.equalTo(50)
         }
-        
-        if pageTabCollectionView.delegate == nil {
-            pageTabCollectionView.delegate = self
-        }
-        if pageTabCollectionView.dataSource == nil {
-            pageTabCollectionView.dataSource = self
-        }
-        
-        if selectedTabIndicatorView.superview == nil {
-            pageTabCollectionView.addSubview(selectedTabIndicatorView)
-        }
-        
+        pageTabCollectionView.delegate = self
+        pageTabCollectionView.dataSource = self
+        pageTabCollectionView.backgroundColor = setting.style.buttonBarBackgroundColor
         pageTabCollectionView.register(PageBarButtonCell.self, forCellWithReuseIdentifier:"KFPageBarButtonCell")
+
+        selectedTabIndicatorView.layer.cornerRadius = setting.style.indicatorHeight / 2
+        selectedTabIndicatorView.backgroundColor = setting.style.indicatorViewBackgroundColor
+        pageTabCollectionView.addSubview(selectedTabIndicatorView)
     }
 
+    open override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        updateIndicatorView()
+    }
+    
     // MARK: - PageTabStrip
     override open func updateIndicatorInfo(_ viewController: UIViewController) {
         if viewControllers.contains(viewController) {
@@ -92,7 +91,11 @@ open class SampleButtonTabStripViewController : PageTabViewController, PageTabSt
     }
     
     // MARK: - PageTabStripDelegate
-    public func updateIndicator(for viewController: PageTabViewController, fromIndex: Int, toIndex: Int, rate: CGFloat) {
+    public func updateIndicatorView() {
+        
+        let rate = scrollView.contentOffset.x / pageWidth
+        let toIndex = (Int)(rate + 0.5)
+        
         guard shouldUpdateButtonBarView else { return }
         let preIndex = Int(floor(rate))
         let nextIndex = preIndex + 1
@@ -118,15 +121,15 @@ open class SampleButtonTabStripViewController : PageTabViewController, PageTabSt
         selectedTabIndicatorView.frame = CGRect(x: newPositionX,
                                                 y: 42,
                                                 width: newWidth,
-                                                height: 3)
+                                                height: setting.style.indicatorHeight)
         
         // 更新样式
         let toCellOp = pageTabCollectionView.cellForItem(at: IndexPath(row: toIndex, section: 0))
         guard let toCellOp = toCellOp else { return }
         let toCell = toCellOp as! PageBarButtonCell
         toCell.changeToSelected()
-        if (fromIndex != toIndex) {
-            let fromCellOp = pageTabCollectionView.cellForItem(at: IndexPath(row: fromIndex, section: 0))
+        if (currentIndex != toIndex) {
+            let fromCellOp = pageTabCollectionView.cellForItem(at: IndexPath(row: currentIndex, section: 0))
             guard let fromCellOp = fromCellOp else { return }
             let fromCell = fromCellOp as! PageBarButtonCell
             fromCell.changeToUnselected()
@@ -159,8 +162,7 @@ open class SampleButtonTabStripViewController : PageTabViewController, PageTabSt
     
     // MARK: - UICollectionView Delegate
     public func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        let width  = UIScreen.main.bounds.width
-        scrollView.setContentOffset(CGPoint(x: width * CGFloat(indexPath.row), y: 0), animated: true)
+        scrollView.setContentOffset(CGPoint(x: pageWidth * CGFloat(indexPath.row), y: 0), animated: true)
     }
     
     // MARK: - Pricate

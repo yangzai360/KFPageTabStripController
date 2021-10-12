@@ -13,7 +13,7 @@ public protocol IndicatorInfoProvider {
 }
 
 public protocol PageTabStripDelegate: AnyObject {
-    func updateIndicator(for viewController: PageTabViewController, fromIndex: Int, toIndex: Int, rate: CGFloat)
+    func updateIndicatorView()
 }
 
 public protocol PageTabStripDataSource: AnyObject {
@@ -31,7 +31,7 @@ open class PageTabViewController : UIViewController, UIScrollViewDelegate {
         scrollViewAux.showsVerticalScrollIndicator = false
         scrollViewAux.showsHorizontalScrollIndicator = false
         scrollViewAux.isPagingEnabled = true
-        scrollViewAux.backgroundColor = .clear
+        scrollViewAux.backgroundColor = .white
         return scrollViewAux
     }()
     
@@ -47,13 +47,13 @@ open class PageTabViewController : UIViewController, UIScrollViewDelegate {
     open private(set) var currentIndex = 0
 
     open var pageWidth: CGFloat {
-        return scrollView.bounds.width
+        return view.bounds.width
     }
     open func pageOffsetForChild(at index: Int) -> CGFloat {
-        return CGFloat(index) * scrollView.bounds.width
+        return CGFloat(index) * pageWidth
     }
     open func offsetForChild(at index: Int) -> CGFloat {
-        return CGFloat(index) * scrollView.bounds.width
+        return CGFloat(index) * pageWidth
     }
     
     open override func viewDidLoad() {
@@ -99,8 +99,8 @@ open class PageTabViewController : UIViewController, UIScrollViewDelegate {
             containerView.addSubview(childController.view)
             childController.view.snp_makeConstraints { make in
                 make.top.bottom.equalToSuperview()
-                make.left.equalToSuperview().offset(CGFloat(index) * view.bounds.width)
-                make.width.equalTo(view.bounds.width)
+                make.left.equalToSuperview().offset(CGFloat(index) * pageWidth)
+                make.width.equalTo(pageWidth)
                 if index == self.viewControllers.count - 1 {
                     make.right.equalToSuperview()
                 }
@@ -124,14 +124,13 @@ open class PageTabViewController : UIViewController, UIScrollViewDelegate {
         if scrollView.contentOffset.y != 0 {
             scrollView.contentOffset = CGPoint(x: scrollView.contentOffset.x, y: 0.0)
         }
-        let offsetX = scrollView.contentOffset.x
-        let width = view.bounds.width
-        let rate = offsetX / width
-        let newIndex = (Int)(offsetX / width + 0.5)
+        
+        let rate = scrollView.contentOffset.x / pageWidth
+        let newIndex = (Int)(rate + 0.5)
         if newIndex > viewControllers.count - 1 || newIndex < 0 {
             return
         }
-        delegate?.updateIndicator(for: self, fromIndex: currentIndex, toIndex: newIndex, rate: rate)
+        delegate?.updateIndicatorView()
         if currentIndex != newIndex {
             currentIndex = newIndex
         }
