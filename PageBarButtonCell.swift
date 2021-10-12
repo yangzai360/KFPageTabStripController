@@ -16,7 +16,7 @@ class PageBarButtonCell : UICollectionViewCell {
     let selectedFont = UIFont.init(name: "PingFang-SC-Medium", size: 16) ?? UIFont.boldSystemFont(ofSize: 16)
     let selectedColor = UIColor.black
     
-    open lazy var label : UILabel = {
+    private lazy var label : UILabel = {
         let labelAux = UILabel()
         labelAux.textAlignment = .center
         labelAux.font = selectedFont
@@ -32,6 +32,7 @@ class PageBarButtonCell : UICollectionViewCell {
         label.setContentHuggingPriority(.defaultHigh, for: .horizontal)
         label.snp_makeConstraints { make in
             make.left.right.equalToSuperview().priorityLow()
+            make.width.greaterThanOrEqualTo(0)
             make.centerX.equalToSuperview().priorityHigh()
             make.height.equalTo(25)
             make.top.equalToSuperview().offset(7)
@@ -48,9 +49,21 @@ class PageBarButtonCell : UICollectionViewCell {
         super.init(coder: coder)
     }
     
+    open func setText(_ text: String?) {
+        label.text = text ?? ""
+        let width = NSString(string: label.text!).boundingRect(with: CGSize(width: 999, height: 999),
+                                                         options: .usesLineFragmentOrigin,
+                                                         attributes: [.font: selectedFont],
+                                                         context: nil).size.width
+        label.snp_updateConstraints { make in
+            make.width.greaterThanOrEqualTo(width)
+        }
+    }
+    
     open func changeToUnselected() {
         label.font = unselectedFont
         label.textColor = unselectedColor
+        
     }
     open func changeToSelected() {
         label.font = selectedFont

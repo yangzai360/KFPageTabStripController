@@ -21,6 +21,7 @@ open class DemoSecondViewController : UIViewController, IndicatorInfoProvider {
         indicatorInfo.unreadCount = 88
         
         DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
+            guard (self.pageTabViewControllerOp != nil) else {return}
             self.indicatorInfo.unreadCount = 32
             self.pageTabViewControllerOp!.updateIndicatorInfo(self)
         }

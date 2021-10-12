@@ -14,6 +14,8 @@ open class KFMessageBoxViewController : SampleButtonTabStripViewController {
     
     public override func viewControllers(for pageTabController: PageTabViewController) -> [UIViewController] {
         
+        setting.style.defaultShowPageIndex = 2
+        
         let firstVC = DemoFirstViewController()
         let secondVC = DemoSecondViewController()
         return [firstVC, secondVC, DemoFirstViewController(), DemoSecondViewController()];

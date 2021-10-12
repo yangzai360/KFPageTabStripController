@@ -15,10 +15,9 @@ public struct KFSampleButtonPageTabSettings {
         public var indicatorHeight: CGFloat = 3
         
         public var buttonBarItemBackgroundColor: UIColor?
-//        public var buttonBarItemFont = UIFont.systemFont(ofSize: 18)
         public var buttonBarItemLeftRightMargin: CGFloat = 8
-//        public var buttonBarItemTitleColor: UIColor?
         public var buttonBarHeight: CGFloat = 45
+        public var defaultShowPageIndex = 0
     }
     public var style = Style()
 }
@@ -26,6 +25,8 @@ public struct KFSampleButtonPageTabSettings {
 open class SampleButtonTabStripViewController : PageTabViewController, PageTabStripDataSource, PageTabStripDelegate, UICollectionViewDataSource, UICollectionViewDelegate {
 
     public var setting = KFSampleButtonPageTabSettings()
+    
+    private var viewIsLoaded = false
     
     public var pageTabCollectionView: UICollectionView = {
         let flowLayout = UICollectionViewFlowLayout()
@@ -76,9 +77,24 @@ open class SampleButtonTabStripViewController : PageTabViewController, PageTabSt
         selectedTabIndicatorView.backgroundColor = setting.style.indicatorViewBackgroundColor
         pageTabCollectionView.addSubview(selectedTabIndicatorView)
     }
+    
+    open override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+    }
 
     open override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
+        
+    }
+    open override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        if !viewIsLoaded && setting.style.defaultShowPageIndex <= viewControllers.count {
+            scrollView.setContentOffset(CGPoint(x: pageWidth * CGFloat(setting.style.defaultShowPageIndex),
+                                                y: 0),
+                                        animated: false)
+        }
+        viewIsLoaded = true
         updateIndicatorView()
     }
     
@@ -86,7 +102,11 @@ open class SampleButtonTabStripViewController : PageTabViewController, PageTabSt
     override open func updateIndicatorInfo(_ viewController: UIViewController) {
         if viewControllers.contains(viewController) {
             let index = viewControllers.firstIndex(of: viewController)!
-            pageTabCollectionView.reloadItems(at: [IndexPath(row: index, section: 0)])
+            guard let cell = pageTabCollectionView.cellForItem(at: IndexPath(row: index, section: 0)) as? PageBarButtonCell else { return }
+            let childController = viewControllers[index] as! IndicatorInfoProvider
+            let indicatorInfo = childController.indicatorInfo(for: self)
+            cell.setText(indicatorInfo.title)
+            cell.unreadDot.setUnreadCount(indicatorInfo.unreadCount)
         }
     }
     
@@ -96,15 +116,15 @@ open class SampleButtonTabStripViewController : PageTabViewController, PageTabSt
         let rate = scrollView.contentOffset.x / pageWidth
         let toIndex = (Int)(rate + 0.5)
         
-        guard shouldUpdateButtonBarView else { return }
+        guard shouldUpdateButtonBarView, viewIsLoaded == true else { return }
         let preIndex = Int(floor(rate))
         let nextIndex = preIndex + 1
         var preCellFrameOp = pageTabCollectionView.cellForItem(at: IndexPath(row: preIndex, section: 0))?.frame
         var nextCellFrameOp = pageTabCollectionView.cellForItem(at: IndexPath(row: nextIndex, section: 0))?.frame
-        if preCellFrameOp == nil {
+        if preCellFrameOp == nil && nextCellFrameOp != nil {
             preCellFrameOp = nextCellFrameOp!.offsetBy(dx: -nextCellFrameOp!.size.width, dy: 0)
         }
-        if nextCellFrameOp == nil {
+        if nextCellFrameOp == nil && preCellFrameOp != nil {
             nextCellFrameOp = preCellFrameOp!.offsetBy(dx: preCellFrameOp!.size.width, dy: 0)
         }
         
@@ -150,7 +170,8 @@ open class SampleButtonTabStripViewController : PageTabViewController, PageTabSt
         
         let childController = viewControllers[indexPath.row] as! IndicatorInfoProvider
         let indicatorInfo = childController.indicatorInfo(for: self)
-        cell.label.text = indicatorInfo.title
+
+        cell.setText(indicatorInfo.title)
         cell.unreadDot.setUnreadCount(indicatorInfo.unreadCount)
         if indexPath.row == currentIndex {
             cell.changeToSelected()
@@ -162,7 +183,9 @@ open class SampleButtonTabStripViewController : PageTabViewController, PageTabSt
     
     // MARK: - UICollectionView Delegate
     public func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        scrollView.setContentOffset(CGPoint(x: pageWidth * CGFloat(indexPath.row), y: 0), animated: true)
+        scrollView.setContentOffset(CGPoint(x: pageWidth * CGFloat(indexPath.row),
+                                            y: 0),
+                                    animated: true)
     }
     
     // MARK: - Pricate
