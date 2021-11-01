@@ -39,13 +39,13 @@ open class PageTabViewController : UIViewController, UIScrollViewDelegate {
         let containerViewAux = UIView(frame: CGRect())
         return containerViewAux
     }()
-
+    
     open weak var delegate: PageTabStripDelegate?
     open weak var datasource: PageTabStripDataSource?
     
     open private(set) var viewControllers = [UIViewController]()
     open private(set) var currentIndex = 0
-
+    
     open var pageWidth: CGFloat {
         return view.bounds.width
     }
@@ -69,26 +69,29 @@ open class PageTabViewController : UIViewController, UIScrollViewDelegate {
             make.edges.equalToSuperview()
             make.height.equalToSuperview()
         }
-        
         reloadDataSource()
         installChildViewController()
     }
     
+    open override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        scrollView.contentSize = CGSize(width: scrollView.contentSize.width, height: 0)
+    }
     
     private func reloadDataSource() {
         guard let dataSource = datasource else {
             print("datasource is nil!")
-            return;
+            return
         }
         viewControllers = dataSource.viewControllers(for: self)
         guard !viewControllers.isEmpty else {
             print("viewControllers is nil!")
-            return;
+            return
         }
         viewControllers.forEach { vc in
             if !(vc is IndicatorInfoProvider) {
                 print("one of viewControllers not confirm IndicatorInfoProvider!")
-                return;
+                return
             }
         }
     }
@@ -134,6 +137,5 @@ open class PageTabViewController : UIViewController, UIScrollViewDelegate {
         if currentIndex != newIndex {
             currentIndex = newIndex
         }
-
     }
 }

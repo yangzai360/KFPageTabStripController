@@ -78,15 +78,6 @@ open class SampleButtonTabStripViewController : PageTabViewController, PageTabSt
         pageTabCollectionView.addSubview(selectedTabIndicatorView)
     }
     
-    open override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        
-    }
-
-    open override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
-        
-    }
     open override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         if !viewIsLoaded && setting.style.defaultShowPageIndex <= viewControllers.count {
