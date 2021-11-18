@@ -10,6 +10,7 @@ import SnapKit
 
 public struct KFSampleButtonPageTabSettings {
     public struct Style {
+        public var containerViewBackgroundColor = UIColor.white
         public var buttonBarBackgroundColor = UIColor.white
         public var indicatorViewBackgroundColor = UIColor(red: 0x7F/256, green: 0x00/256, blue: 0xFF/256, alpha: 1)
         public var indicatorHeight: CGFloat = 3
@@ -62,6 +63,8 @@ open class SampleButtonTabStripViewController : PageTabViewController, PageTabSt
     // MARK: - Life cycle
     open override func viewDidLoad() {
         super.viewDidLoad()
+        
+        scrollView.backgroundColor = setting.style.containerViewBackgroundColor
                 
         view.addSubview(pageTabCollectionView)
         pageTabCollectionView.snp_makeConstraints { make in
@@ -93,11 +96,8 @@ open class SampleButtonTabStripViewController : PageTabViewController, PageTabSt
     override open func updateIndicatorInfo(_ viewController: UIViewController) {
         if viewControllers.contains(viewController) {
             let index = viewControllers.firstIndex(of: viewController)!
-            guard let cell = pageTabCollectionView.cellForItem(at: IndexPath(row: index, section: 0)) as? PageBarButtonCell else { return }
-            let childController = viewControllers[index] as! IndicatorInfoProvider
-            let indicatorInfo = childController.indicatorInfo(for: self)
-            cell.setText(indicatorInfo.title)
-            cell.unreadDot.setUnreadCount(indicatorInfo.unreadCount)
+            pageTabCollectionView.reloadItems(at: [IndexPath(row: index, section: 0)])
+            updateIndicatorView()
         }
     }
     
