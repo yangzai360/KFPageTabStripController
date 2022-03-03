@@ -24,7 +24,7 @@ TODO: Add long description of the pod here.
   s.homepage         = 'https://github.com/7035329/KFPageTabStripController'
   s.license          = { :type => 'MIT', :file => 'LICENSE' }
   s.author           = { '7035329' => 'jieyang@didichuxing.com' }
-  s.source           = { :git => 'https://github.com/7035329/KFPageTabStripController.git', :tag => s.version.to_s }
+  s.source           = { :git => 'git@git.xiaojukeji.com:KingFlower/driver-ios/KFPageTabStripController.git', :tag => s.version.to_s }
   # s.social_media_url = 'https://twitter.com/<TWITTER_USERNAME>'
   s.swift_version = '5.3'
   s.ios.deployment_target = '10.0'
